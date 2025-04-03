@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Completo de Video</title>
+</head>
+<body>
+
+<h2>Exemplo de Vídeo com Propriedades e Métodos</h2>
+
+<video id="meuVideo" width="640" controls>
+    <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+    Seu navegador não suporta o elemento <code>video</code>.
+</video>
+
+<p id="videoInfo"></p>
+<p id="videoHeightInfo"></p>
+<p id="tipoSuporte"></p>
+
+<button onclick="alterarTamanho()" type="submit">height</button>
+
+
+<script>
+      const video = document.getElementById('meuVideo');
+
+// Função para alterar o tamanho do vídeo
+function alterarTamanho() {
+    const largura = document.getElementById('largura').value;
+    const altura = document.getElementById('altura').value;
+
+    // Alterando os parâmetros width e height
+    video.width = 100;
+    video.height =2;
+
+    // Atualizando as informações exibidas
+    atualizarInformacoes();
+}
+
+// Função para atualizar as informações do vídeo
+function atualizarInformacoes() {
+    // Obtendo as dimensões do vídeo
+    const largura = video.videoWidth;
+    const altura = video.videoHeight;
+
+    // Exibindo as dimensões do vídeo
+    document.getElementById('videoInfo').textContent = `A largura do vídeo é: ${largura} pixels`;
+    document.getElementById('videoHeightInfo').textContent = `A altura do vídeo é: ${altura} pixels`;
+    
+    // Verificando se o tipo MP4 pode ser reproduzido
+    const suporteMP4 = video.canPlayType('video/mp4');
+    // Verificando se o tipo WebM pode ser reproduzido
+    const suporteWebM = video.canPlayType('video/webm');
+
+    // Exibindo os resultados de suporte aos tipos de vídeo
+    document.getElementById('tipoSuporte').textContent = `
+        Suporte para MP4: ${suporteMP4 ? suporteMP4 : "Não Suportado"} 
+        | Suporte para WebM: ${suporteWebM ? suporteWebM : "Não Suportado"}
+    `;
+}
+
+// Inicializa as informações do vídeo quando a página carrega
+video.addEventListener('loadeddata', function() {
+    atualizarInformacoes();
+});
+    
+</script>
+
+</body>
+</html>
